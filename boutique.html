@@ -51,7 +51,10 @@
             display: flex;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
         }
         .product:hover {
             transform: scale(1.02);
@@ -100,7 +103,8 @@
         </ul>
     </nav>
     <div class="container">
-        <div class="product">
+        <!-- Lampe avant -->
+        <a href="lampe-avant.html" class="product">
             <img src="https://via.placeholder.com/150" alt="Lampe avant pour vélo">
             <div>
                 <h3>Lampe avant pour vélo</h3>
@@ -108,8 +112,9 @@
                 <p><strong>Prix :</strong> 25,00 €</p>
                 <button aria-label="Ajouter la lampe avant pour vélo au panier">Ajouter au panier</button>
             </div>
-        </div>
-        <div class="product">
+        </a>
+        <!-- Lampe arrière -->
+        <a href="lampe-arriere.html" class="product">
             <img src="https://via.placeholder.com/150" alt="Lampe arrière pour vélo">
             <div>
                 <h3>Lampe arrière pour vélo</h3>
@@ -117,8 +122,9 @@
                 <p><strong>Prix :</strong> 15,00 €</p>
                 <button aria-label="Ajouter la lampe arrière pour vélo au panier">Ajouter au panier</button>
             </div>
-        </div>
-        <div class="product">
+        </a>
+        <!-- Lampe rechargeable -->
+        <a href="lampe-rechargeable.html" class="product">
             <img src="https://via.placeholder.com/150" alt="Lampe rechargeable pour vélo">
             <div>
                 <h3>Lampe rechargeable pour vélo</h3>
@@ -126,7 +132,7 @@
                 <p><strong>Prix :</strong> 35,00 €</p>
                 <button aria-label="Ajouter la lampe rechargeable pour vélo au panier">Ajouter au panier</button>
             </div>
-        </div>
+        </a>
     </div>
 </body>
 </html>
