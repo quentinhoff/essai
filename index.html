@@ -5,15 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accessoires Vélo Sécurité</title>
     <style>
+        /* Styles généraux */
         body {
-            background-image: url("blue-wallpaper-7240665_1920.jpg"); /* Remplacez par le chemin de votre image */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background-image: url("blue-wallpaper-7240665_1920.jpg"); /* Remplacez par votre image */
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            /* Autres options possibles:
-            background-position: center center;
-            background-color: #f0f0f0;
-            */
+        }
+
+        /* Navigation */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            margin: 0 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Bannière */
+        .banner {
+            position: relative;
+            text-align: center;
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            opacity: 0.3;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .banner h1 {
+            font-size: 48px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .banner .btn {
+            padding: 10px 20px;
+            color: white;
+            background: #007BFF;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .banner .btn:hover {
+            background: #0056b3;
+        }
+
+        /* Catégories */
+        .categories {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .categories h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .category {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .category img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .category a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .category a:hover {
+            text-decoration: underline;
+        }
+
+        /* Promotions */
+        .promo {
+            padding: 50px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .promo h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .product {
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .product img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .product p {
+            font-size: 16px;
+            color: #ffcc00;
+        }
+
+        .product .btn {
+            padding: 10px 20px;
+            color: white;
+            background: #007BFF;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .product .btn:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
         }
     </style>
 </head>
@@ -22,13 +184,14 @@
         <nav>
             <a href="index.html">Accueil</a>
             <a href="boutique.html">Boutique</a>
-            <a href="apropos.html">A Propos</a>
+            <a href="apropos.html">À Propos</a>
             <a href="contact.html">Contact</a>
             <a href="panier.html">Panier</a>
         </nav>
     </header>
 
     <main>
+        <!-- Section Bannière -->
         <section class="banner">
             <img src="blue-wallpaper-7240665_1920.jpg" alt="Bannière produit phare">
             <h1>Roulez en toute sécurité, de jour comme de nuit !</h1>
@@ -36,6 +199,7 @@
             <a href="boutique.html" class="btn">Voir la boutique</a>
         </section>
 
+        <!-- Section Catégories -->
         <section class="categories">
             <h2>Nos catégories</h2>
             <div class="category">
@@ -52,6 +216,7 @@
             </div>
         </section>
 
+        <!-- Section Promotion -->
         <section class="promo">
             <h2>Promotion du moment</h2>
             <div class="product">
@@ -62,8 +227,11 @@
             </div>
         </section>
 
+        <!-- Section Appel -->
         <section class="appel">
-            <p>Sécurité et style pour tous les cyclistes</p>
+            <p style="text-align: center; padding: 20px; background: rgba(0, 0, 0, 0.5); font-size: 18px;">
+                Sécurité et style pour tous les cyclistes
+            </p>
         </section>
     </main>
 
