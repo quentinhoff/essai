@@ -51,6 +51,17 @@
       max-width: 100%;
       height: auto;
     }
+
+    /* Style pour l'image ajoutée */
+    .image-section {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .image-section img {
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
@@ -63,8 +74,18 @@
   </nav>
 
   <main>
-    <!-- Contenu des pages -->
-    <section id="contenu"></section>
+    <!-- Section pour une bannière ou un en-tête -->
+    <section class="banner">
+      <h1>Bienvenue dans notre boutique</h1>
+    </section>
+
+    <!-- Section pour le contenu principal -->
+    <section id="contenu">
+      <!-- Ajout de l'image -->
+      <div class="image-section">
+        <img src="chemin/vers/mon/image.jpg" alt="Description de l'image">
+      </div>
+    </section>
   </main>
 
   <script src="script.js"></script>
