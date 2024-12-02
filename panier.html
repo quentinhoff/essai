@@ -44,23 +44,72 @@
     .product {
       border: 1px solid #ccc;
       padding: 10px;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .product button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+
+    .cart {
+      margin-top: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 10px;
     }
 
-    .product img {
-      max-width: 100%;
-      height: auto;
+    .cart-item button {
+      margin-left: 5px;
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      padding: 5px;
+      cursor: pointer;
     }
 
-    /* Style pour l'image ajoutée */
-    .image-section {
+    .cart-item button:hover {
+      background-color: #a71d2a;
+    }
+
+    .total, .actions {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .actions button {
+      margin-right: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .actions button:hover {
+      background-color: #1e7e34;
+    }
+
+    .empty-cart {
       text-align: center;
-      margin: 20px 0;
-    }
-
-    .image-section img {
-      max-width: 100%;
-      height: auto;
+      margin-top: 20px;
+      color: #888;
+      font-style: italic;
     }
   </style>
 </head>
@@ -79,15 +128,138 @@
       <h1>Bienvenue dans notre boutique</h1>
     </section>
 
-    <!-- Section pour le contenu principal -->
-    <section id="contenu">
-      <!-- Ajout de l'image -->
-      <div class="image-section">
-        <img src="chemin/vers/mon/image.jpg" alt="Description de l'image">
-      </div>
-    </section>
+    <!-- Section pour les produits -->
+    <h1>Boutique</h1>
+    <div class="product">
+      <span>Produit A</span>
+      <span>10€ (<span id="stock-Produit A">5</span> en stock)</span>
+      <button id="add-Produit A" onclick="addToCart('Produit A', 10, 5)">Ajouter au panier</button>
+    </div>
+
+    <div class="product">
+      <span>Produit B</span>
+      <span>15€ (<span id="stock-Produit B">3</span> en stock)</span>
+      <button id="add-Produit B" onclick="addToCart('Produit B', 15, 3)">Ajouter au panier</button>
+    </div>
+
+    <div class="product">
+      <span>Produit C</span>
+      <span>20€ (<span id="stock-Produit C">10</span> en stock)</span>
+      <button id="add-Produit C" onclick="addToCart('Produit C', 20, 10)">Ajouter au panier</button>
+    </div>
+
+    <h2>Panier</h2>
+    <div class="cart" id="cart"></div>
+    <div class="total" id="total">Total : 0€</div>
+    <div class="actions">
+      <button onclick="emptyCart()">Vider le panier</button>
+      <button onclick="checkout()">Valider l'achat</button>
+    </div>
+    <div class="empty-cart" id="empty-message">Votre panier est vide.</div>
   </main>
 
-  <script src="script.js"></script>
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const stock = { 'Produit A': 5, 'Produit B': 3, 'Produit C': 10 };
+
+    function addToCart(productName, productPrice, maxStock) {
+      if (stock[productName] <= 0) {
+        alert(`${productName} est en rupture de stock !`);
+        return;
+      }
+
+      const existingProduct = cart.find(item => item.name === productName);
+      if (existingProduct) {
+        if (existingProduct.quantity < maxStock) {
+          existingProduct.quantity += 1;
+          stock[productName] -= 1;
+        } else {
+          alert(`Stock limité : ${productName} ne peut pas être ajouté davantage.`);
+        }
+      } else {
+        cart.push({ name: productName, price: productPrice, quantity: 1 });
+        stock[productName] -= 1;
+      }
+      saveAndRenderCart();
+    }
+
+    function reduceQuantity(productName) {
+      const product = cart.find(item => item.name === productName);
+      if (product) {
+        product.quantity -= 1;
+        stock[productName] += 1;
+        if (product.quantity <= 0) {
+          cart = cart.filter(item => item.name !== productName);
+        }
+      }
+      saveAndRenderCart();
+    }
+
+    function removeFromCart(productName) {
+      const product = cart.find(item => item.name === productName);
+      if (product) {
+        stock[productName] += product.quantity;
+        cart = cart.filter(item => item.name !== productName);
+      }
+      saveAndRenderCart();
+    }
+
+    function emptyCart() {
+      cart.forEach(item => {
+        stock[item.name] += item.quantity;
+      });
+      cart = [];
+      saveAndRenderCart();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Votre panier est vide !");
+        return;
+      }
+      alert("Merci pour votre achat !");
+      emptyCart();
+    }
+
+    function saveAndRenderCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartElement = document.getElementById('cart');
+      const totalElement = document.getElementById('total');
+      const emptyMessage = document.getElementById('empty-message');
+
+      cartElement.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <span>${item.name} (x${item.quantity})</span>
+          <span>${item.price * item.quantity}€</span>
+          <div>
+            <button onclick="reduceQuantity('${item.name}')">-</button>
+            <button onclick="addToCart('${item.name}', ${item.price}, ${stock[item.name]})">+</button>
+            <button onclick="removeFromCart('${item.name}')">Supprimer</button>
+          </div>
+        `;
+        cartElement.appendChild(cartItem);
+        total += item.price * item.quantity;
+      });
+
+      totalElement.textContent = `Total : ${total}€`;
+      emptyMessage.style.display = cart.length === 0 ? 'block' : 'none';
+
+      for (const key in stock) {
+        document.getElementById(`stock-${key}`).textContent = stock[key];
+        document.getElementById(`add-${key}`).disabled = stock[key] <= 0;
+      }
+    }
+
+    renderCart();
+  </script>
 </body>
 </html>
