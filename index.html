@@ -10,38 +10,58 @@
             margin: 0;
             font-family: Arial, sans-serif;
             color: white;
-            background-image: url("blue-wallpaper-7240665_1920.jpg"); /* Remplacez par votre image */
+            background-image: url("blue-wallpaper-7240665_1920.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
 
-        /* Navigation */
+        /* En-tête avec logo centré */
         header {
-            position: absolute;
+            position: sticky;
             top: 0;
             width: 100%;
             z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: rgba(0, 0, 0, 0.6);
+            gap: 15px;
         }
 
         nav a {
             text-decoration: none;
             color: white;
-            margin: 0 10px;
             font-size: 14px;
             text-transform: uppercase;
         }
 
         nav a:hover {
             text-decoration: underline;
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .logo img {
+            height: 50px; /* Ajustez la taille du logo */
+            width: auto;
         }
 
         /* Bannière */
@@ -181,13 +201,26 @@
 </head>
 <body>
     <header>
-        <nav>
-            <a href="index.html">Accueil</a>
-            <a href="boutique.html">Boutique</a>
-            <a href="apropos.html">À Propos</a>
-            <a href="contact.html">Contact</a>
-            <a href="panier.html">Panier</a>
-        </nav>
+        <div class="nav-container">
+            <!-- Navigation gauche -->
+            <nav class="nav-left">
+                <a href="index.html">Accueil</a>
+                <a href="boutique.html">Boutique</a>
+                <a href="apropos.html">À Propos</a>
+            </nav>
+
+            <!-- Logo centré -->
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <!-- Navigation droite -->
+            <nav class="nav-right">
+                <a href="contact.html">Contact</a>
+                <a href="panier.html">Panier</a>
+                <a href="#">Connexion</a>
+            </nav>
+        </div>
     </header>
 
     <main>
